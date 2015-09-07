@@ -14,7 +14,8 @@ $(document).ready(function(){
     $('.header-slide').backstretch([
       "../static/slide/bg01.jpg",
       "../static/slide/bg02.jpg",
-      "../static//slide/bg03.jpg"
+      "../static/slide/bg03.jpg",
+      "../static/slide/alberca.jpg"
       ], {
         fade: 850,
         duration: 4000

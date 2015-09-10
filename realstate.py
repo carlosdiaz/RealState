@@ -10,5 +10,9 @@ def home():
 def contact():
 	return render_template('contact.html')
 
+@app.route('/departamentos')
+def departamentos():
+	return render_template('depas.html')
+
 if __name__ == '__main__':
     app.run()

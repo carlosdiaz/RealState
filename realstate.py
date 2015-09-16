@@ -14,5 +14,14 @@ def contact():
 def departamentos():
 	return render_template('depas.html')
 
+@app.route('/depaslist')
+def depaslist():
+	return render_template('departamentoslist.html')
+
+@app.route('/casaslist')
+def casaslist():
+	return render_template('casaslist.html')
+
+
 if __name__ == '__main__':
     app.run()

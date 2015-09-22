@@ -40,7 +40,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"><span>Ari<strong>llo.</strong></span></a>
+          <a class="navbar-brand" href="/"><span>Mar<strong>cia Bienes raices.</strong></span></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -223,19 +223,25 @@
             </div>
             <!-- end:sorting -->
 
+            {% block content %}
+
+            {% for propertyRecord in propertyRecords %}
+
+
             <!-- begin:product -->
             <div class="row container-realestate">
+
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="property-container">
                   <div class="property-content-list">
                     <div class="property-image-list">
-                      <img src="img/img13.jpg" alt="mikha real estate theme">
+                      <img src="../static/img/img13.jpg" alt="Marcia">
                       <div class="property-price">
-                        <h4>Luxury Villa</h4>
-                        <span>$30,000<small>/month</small></span>
+                        <h4>{{propertyRecord.type}}</h4>
+                        <span>{{propertyRecord.price}}<small>/mes</small></span>
                       </div>
                       <div class="property-status">
-                        <span>For Rent</span>
+                        <span>{{propertyRecord.contract}}</span>
                       </div>
                       <div class="property-features">
                         <span><i class="fa fa-home"></i> 7,000 m<sup>2</sup></span>
@@ -246,23 +252,23 @@
                       </div>
                     </div>
                     <div class="property-text">
-                      <h3><a href="#">Land In Central Park</a> <small>22, JJ Road, Yogyakarta</small></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                      cillum dolore eu fugiat nulla pariatur.</p>
-                      <p><a href="#" class="btn btn-primary">More Detail &raquo;</a></p>
+                      <h3><a href="#">{{propertyRecord.location}}</a> <small>{{propertyRecord.location}}</small></h3>
+                      <p>{{propertyRecord.description}}</p>
+                      <p><a href="#" class="btn btn-primary">Mas detalles &raquo;</a></p>
                     </div>
                   </div>
                 </div>
               </div>
+
+
+
               <!-- break -->
+              <!--
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="property-container">
                   <div class="property-content-list">
                     <div class="property-image-list">
-                      <img src="img/img13.jpg" alt="mikha real estate theme">
+                      <img src="../static/img/img13.jpg" alt="mikha real estate theme">
                       <div class="property-price">
                         <h4>Land In Central Park</h4>
                         <span>$30,000<small>/month</small></span>
@@ -290,12 +296,16 @@
                   </div>
                 </div>
               </div>
+              -->
+
               <!-- break -->
+
+              <!--
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="property-container">
                   <div class="property-content-list">
                     <div class="property-image-list">
-                      <img src="img/img13.jpg" alt="mikha real estate theme">
+                      <img src="../static/img/img13.jpg" alt="mikha real estate theme">
                       <div class="property-price">
                         <h4>The Urban Life</h4>
                         <span>$30,000<small>/month</small></span>
@@ -312,7 +322,7 @@
                       </div>
                     </div>
                     <div class="property-text">
-                      <h3><a href="#">Land In Central Park</a> <small>22, JJ Road, Yogyakarta</small></h3>
+                      <h3><a href="#">The Urban Life</a> <small>22, JJ Road, Yogyakarta</small></h3>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -323,9 +333,16 @@
                   </div>
                 </div>
               </div>
+              -->
               <!-- break -->
             </div>
             <!-- end:product -->
+
+      {% endfor %}
+
+      {% endblock %}
+
+
 
             <!-- begin:pagination -->
             <div class="row">
@@ -349,28 +366,36 @@
           <div class="col-md-3 col-md-pull-9 sidebar">
             <div class="widget widget-sidebar widget-white">
               <div class="widget-header">
-                <h3>Recent Property</h3>
-              </div>    
+                <h3>Departamentos recientes</h3>
+              </div>
+            {% block body %}
+
+            {% for propertyRecord in propertyRecords %}
+    
               <ul>
-                <li><a href="#">Luxury Villa</a></li>
+                <li><a href="#">{{propertyRecord.type}}</a></li>
+                <!--
                 <li><a href="#">Land In Central Park</a></li>
                 <li><a href="#">The Urban Life</a></li>
                 <li><a href="#">Luxury Office</a></li>
                 <li><a href="">Luxury Villa In Rego Park</a></li>
+                -->
               </ul>
+            {% endfor %}
+
+          {% endblock %}
+
             </div>
             <!-- break -->
             <div class="widget widget-sidebar widget-white">
               <div class="widget-header">
-                <h3>Property Type</h3>
+                <h3>Tipos de propiedades</h3>
               </div>    
               <ul class="list-check">
-                <li><a href="#">Office</a>&nbsp;(18)</li>
-                <li><a href="#">Office</a>&nbsp;(43)</li>
-                <li><a href="#">Shop</a>&nbsp;(31)</li>
-                <li><a href="#">Villa</a>&nbsp;(52)</li>
-                <li><a href="#">Apartment</a>&nbsp;(8)</li>
-                <li><a href="#">Single Family Home</a>&nbsp;(11)</li>
+                <li><a href="#">Casas</a>&nbsp;(18)</li>
+                <li><a href="#">Departamentos</a>&nbsp;(43)</li>
+                <li><a href="#">Bodegas</a>&nbsp;(31)</li>
+                <li><a href="#">Terrenos</a>&nbsp;(52)</li>                
               </ul>
             </div>
             <!-- break -->
@@ -379,10 +404,9 @@
                 <h3>Top Agents</h3>
               </div>    
               <ul>
-                <li><a href="#">John Doe</a></li>
-                <li><a href="#">Christoper Drew</a></li>
-                <li><a href="#">Jane Doe</a></li>
-                <li><a href="#">Jeny</a></li>
+                <li><a href="#">Marcia</a></li>
+                <li><a href="#">Diana</a></li>
+                <li><a href="#">Paulina</a></li>                
               </ul>
             </div>
             <!-- break -->
@@ -394,8 +418,9 @@
                 <li class=""><a href="#archives" data-toggle="tab" title="Archives"><i class="fa fa-calendar"></i></a></li>
               </ul>
 
+              <!--
               <div id="myTabContent" class="tab-content">
-                <!-- begin:popular-post -->
+                
                 <div class="tab-pane fade active in" id="popular">
                   <div class="post-container">
                     <div class="post-img" style="background: url(img/img02.jpg);"></div>
@@ -405,7 +430,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- break -->
+                
                   <div class="post-container">
                     <div class="post-img" style="background: url(img/img03.jpg);"></div>
                     <div class="post-content">
@@ -414,7 +439,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- break -->
+                
                   <div class="post-container">
                     <div class="post-img" style="background: url(img/img04.jpg);"></div>
                     <div class="post-content">
@@ -423,8 +448,9 @@
                       </div>
                     </div>
                   </div>
-                  <!-- break -->
+                
                 </div>
+                -->
                 <!-- end:popular-post -->
 
                 <!-- begin:recent-post -->

@@ -5,7 +5,8 @@ import sqlite3
 
 app = Flask(__name__)
 
-app.database = "marciarealstate.db"
+#app.database = "marciarealstate.db"
+app.database = "realstate.db"
 app.secret_key = "xcFtjs3Ji896Ghm"
 
 
@@ -25,12 +26,17 @@ def departamentos():
 @app.route('/depaslist')
 def depaslist():
 	g.db = connect_db()
-	cur = g.db.execute('select price, type, contract, location, description from properties')
-	propertyRecords = [dict(price=row[0], type=row[1], contract=row[2] , location=row[3], description=row[4]) for row in cur.fetchall()]
+	cur = g.db.execute('select price, type, contract, location, description, imagetodisplay from properties')
+	propertyRecords = [dict(price=row[0], type=row[1], contract=row[2] , location=row[3], description=row[4], imagetodisplay=row[5]) for row in cur.fetchall()]
 	#(ID TEXT, PRICE TEXT, TYPE TEXT, CONTRACT TEXT, LOCATION TEXT, BATHROOMS TEXT, BEDROOMS TEXT, AREA TEXT, FEATURES TEXT, DESCRIPTION TEXT)""")
-	g.db.close()
-	#return render_template('welcome.html', shoes = shoes)
+	
+	#curLinks = g.db.execute('select name from linksproperties where id = "1"')
+	#linksPropertiesRecords = curLinks.fetchone()
+
+	g.db.close()	
+	#return render_template('departamentoslist.html', propertyRecords = propertyRecords, linksPropertiesRecords = linksPropertiesRecords)
 	return render_template('departamentoslist.html', propertyRecords = propertyRecords)
+	#return render_template('departamentoslist.html',  linksPropertiesRecords = linksPropertiesRecords)
 
 @app.route('/casaslist')
 def casaslist():

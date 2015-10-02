@@ -11,9 +11,20 @@ app.secret_key = "xcFtjs3Ji896Ghm"
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+	if request.method == 'POST':
+		#flash('Es un post' )
+		if request.form['state'] != "" :	
+			valorState = request.form['state']
+			flash('Valor de state %s' %valorState)
+			return render_template('depas.html')
+		else:
+			
+			flash('Hubo un error' )
+			#return redirect(url_for('welcome'))
 	return render_template('index.html')
+
 
 @app.route('/contact')
 def contact():
@@ -37,6 +48,7 @@ def depaslist():
 	#return render_template('departamentoslist.html', propertyRecords = propertyRecords, linksPropertiesRecords = linksPropertiesRecords)
 	return render_template('departamentoslist.html', propertyRecords = propertyRecords)
 	#return render_template('departamentoslist.html',  linksPropertiesRecords = linksPropertiesRecords)
+
 
 @app.route('/casaslist')
 def casaslist():

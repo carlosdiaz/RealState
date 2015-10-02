@@ -84,18 +84,20 @@
           <div class="col-md-5">
             <div class="quick-search">
               <div class="row">
-                <form role="form">
+
+                <form role="form" action="" method="post">
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="form-group">
                       <label for="country">Estado</label>
-                      <select class="form-control">
+                      <select class="form-control" name="state" value="{{request.form.state}}">
                         <option>Morelos</option>
                         <option>DF</option>
                         <option>Queretaro</option>
                         <option>Estado de Mexico</option>
-                        <option>Puebla</option>
+                        <option>Puebla</option>                        
                       </select>
                     </div>
+                    <!--
                     <div class="form-group">
                       <label for="bedroom">Habitaciones</label>
                       <select class="form-control">
@@ -105,17 +107,20 @@
                         <option>4</option>
                       </select>
                     </div>
+                    -->
+
                   </div>
                   <!-- break -->
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="form-group">
                       <label for="location">Ciudad</label>
-                      <select class="form-control">
+                      <select class="form-control" name="city" value="{{request.form.city}}">
                         <option>Cuernavaca</option>
                         <option>DF</option>
                         <option>Puebla</option>                        
                       </select>
                     </div>
+                    <!--
                     <div class="form-group">
                       <label for="bathroom">Baños</label>
                       <select class="form-control">
@@ -125,45 +130,53 @@
                         <option>4</option>
                       </select>
                     </div>
+                    -->
                   </div>
                   <!-- break -->
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="form-group">
                       <label for="status">Estatus</label>
-                      <select class="form-control">
+                      <select class="form-control" name="status" value="{{request.form.status}}">
                         <option>Venta</option>
                         <option>Renta</option>
                       </select>
                     </div>
+
+                    <!--
                     <div class="form-group">
                       <label for="minprice">Precio minimo</label>
-                      <select class="form-control">
+                      <select class="form-control" name="lowerPrice" value="{{request.form.lowerPrice}}">
                         <option>$4,200</option>
                         <option>$6,700</option>
                         <option>$8,150</option>
                         <option>$11,110</option>
                       </select>
                     </div>
+                    -->
+
                   </div>
                   <!-- break -->
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="form-group">
                       <label for="type">Tipo</label>
-                      <select class="form-control">
-                        <option>Villa</option>
-                        <option>Residencia</option>
-                        <option>Local comercial</option>
+                      <select class="form-control" name="type" value="{{request.form.type}}">
+                        <option>Casa</option>
+                        <option>Departamento</option>
+                        <option>Terreno</option>
+                        <option>Bodega</option>
                       </select>
                     </div>
+                    <!--
                     <div class="form-group">
                       <label for="maxprice">Precio Maximo</label>
-                      <select class="form-control">
+                      <select class="form-control" name="highestPrice" value="{{request.form.highestPrice}}">
                         <option>$8,200</option>
                         <option>$11,700</option>
                         <option>$14,150</option>
                         <option>$21,110</option>
                       </select>
                     </div>
+                    -->
                   </div>
                   <div class="col-md-12 col-sm-12"><input type="submit" name="submit" value="Buscar" class="btn btn-primary btn-lg btn-block"></div>
 

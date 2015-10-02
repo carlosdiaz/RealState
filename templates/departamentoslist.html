@@ -104,7 +104,7 @@
                   <!-- break -->
                   <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="form-group">
-                      <label for="status">Tipo</label>
+                      <label for="status">Estatus</label>
                       <select class="form-control">
                         <option>Venta</option>
                         <option>Renta</option>
@@ -164,6 +164,10 @@
               <li><a href="/">Inicio</a></li>
               <li><a href="#">ListaDepartamentos</a></li>
               <!--
+              <li><a href="#">{{linksPropertiesRecords}}</a></li>
+              -->
+              
+              <!--
               <li class="active">Your Keyword</li>
               -->
             </ol>
@@ -207,7 +211,7 @@
                   </div>
                   <span>Muestra : </span>
                   <div class="form-group">
-                    <label class="sr-only" for="show">Muestra : </label>
+                    <label class="sr-only" for="show">Muestra :  </label>
                     <select class="form-control">
                       <option>6</option>
                       <option>10</option>
@@ -228,6 +232,8 @@
             {% block content %}
             -->
 
+            
+
             {% for propertyRecord in propertyRecords %}
 
 
@@ -238,10 +244,16 @@
                 <div class="property-container">
                   <div class="property-content-list">
                     <div class="property-image-list">
+                      <!--
                       <img src="../static/img/img13.jpg" alt="Marcia">
+                      -->
+                      <img src="{{propertyRecord.imagetodisplay}}" alt="Marcia">
+                      
+
                       <div class="property-price">
                         <h4>{{propertyRecord.type}}</h4>
                         <span>{{propertyRecord.price}}<small>/mes</small></span>
+                        
                       </div>
                       <div class="property-status">
                         <span>{{propertyRecord.contract}}</span>

@@ -165,6 +165,12 @@
     </div>
     <!-- end:header -->
 
+
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}
+
+
     <!-- begin:content -->
     <div id="content">
       <div class="container">

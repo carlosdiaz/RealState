@@ -20,7 +20,7 @@ def home():
 			cityValue = request.form['city']
 			statusValue = request.form['status']
 			typeValue = request.form['type']
-			#self.searchProperties(stateValue, cityValue, statusValue, typeValue)
+			self.searchProperties(stateValue, cityValue, statusValue, typeValue)
 
 			flash('Valor de state %s ' %stateValue )
 			flash('Valor de city %s '  %cityValue)

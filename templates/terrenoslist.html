@@ -509,6 +509,12 @@
         </div>
       </div>
     </div>
+
+
+{% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}
+    
     <!-- end:content -->
 
     <!-- begin:news -->

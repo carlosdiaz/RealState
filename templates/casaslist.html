@@ -1,13 +1,55 @@
 {% extends "layout.html" %}
 {% block bread %}casaslist{% endblock %}
-{% block head %}
-  {{ super() }}
-  <style type="text/css">
-    .important { color: #336699; }
-  </style>
-{% endblock %}
 {% block content %}
-  <h1>Index</h1>
-  <p class="important">
-    Welcome on my awesome homepage.
+
+            {% for propertyRecord in propertyRecords %}
+
+
+            <!-- begin:product -->
+            <div class="row container-realestate">
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="property-container">
+                  <div class="property-content-list">
+                    <div class="property-image-list">
+                      <!--
+                      <img src="../static/img/img13.jpg" alt="Marcia">
+                      -->
+                      <img src="{{propertyRecord.imagetodisplay}}" alt="Marcia">
+                      
+
+                      <div class="property-price">
+                        <h4>{{propertyRecord.type}}</h4>
+                        <span>{{propertyRecord.price}}<small>/mes</small></span>
+                        
+                      </div>
+                      <div class="property-status">
+                        <span>{{propertyRecord.contract}}</span>
+                      </div>
+                      <div class="property-features">
+                        <span><i class="fa fa-home"></i> 7,000 m<sup>2</sup></span>
+                        <span><i class="fa fa-hdd-o"></i> 3 Bed</span>
+                        <span><i class="fa fa-male"></i> 2 Bath</span>
+                        <span><i class="fa fa-building-o"></i> 2 Floors</span>
+                        <span><i class="fa fa-car"></i> 2 Garages</span>
+                      </div>
+                    </div>
+                    <div class="property-text">
+                      <h3><a href="#">{{propertyRecord.location}}</a> <small>{{propertyRecord.location}}</small></h3>
+                      <p>{{propertyRecord.description}}</p>
+                      <p><a href="#" class="btn btn-primary">Mas detalles &raquo;</a></p>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+
+
+            </div>
+            <!-- end:product -->
+
+      {% endfor %}
+
+
+
+
 {% endblock %}

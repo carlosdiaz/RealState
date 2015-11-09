@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
-{% block bread %}casaslist{% endblock %}
+{% block bread %}depaslist{% endblock %}
+
+
 {% block content %}
+
+{% block head %}Departamentos encontrados{% endblock %}
+
 
             {% for propertyRecord in propertyRecords %}
 
@@ -35,7 +40,7 @@
                       </div>
                     </div>
                     <div class="property-text">
-                      <h3><a href="#">{{propertyRecord.location}}</a> <small>{{propertyRecord.location}}</small></h3>
+                      <h3><a href="description/{{propertyRecord.id}}">{{propertyRecord.location}}</a> <small>{{propertyRecord.location}}</small></h3>
                       <p>{{propertyRecord.description}}</p>
                       <p><a href="#" class="btn btn-primary">Mas detalles &raquo;</a></p>
                     </div>
@@ -48,8 +53,5 @@
             <!-- end:product -->
 
       {% endfor %}
-
-
-
 
 {% endblock %}

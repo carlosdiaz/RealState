@@ -45,11 +45,11 @@ def departamentos():
 @app.route('/depaslist')
 def depaslist():
 	g.db = connect_db()
-	cur = g.db.execute('select price, type, contract, location, description, imagetodisplay from properties where type="Departamento"' )
-	propertyRecords = [dict(price=row[0], type=row[1], contract=row[2] , location=row[3], description=row[4], imagetodisplay=row[5]) for row in cur.fetchall()]
+	cur = g.db.execute('select id, price, type, contract, location, description, imagetodisplay from properties where type="Departamento"' )
+	propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6]) for row in cur.fetchall()]
 	g.db.close()	
 	
-	print propertyRecords
+	#print propertyRecords
 
 	return render_template('departamentoslist.html', propertyRecords = propertyRecords)
 	#return render_template('departamentoslist.html',  linksPropertiesRecords = linksPropertiesRecords)
@@ -57,16 +57,35 @@ def depaslist():
 @app.route('/casaslist')
 def casaslist():
 	g.db = connect_db()
-	cur = g.db.execute('select price, type, contract, location, description, imagetodisplay from properties where type="Casa"' )
-	propertyRecords = [dict(price=row[0], type=row[1], contract=row[2] , location=row[3], description=row[4], imagetodisplay=row[5]) for row in cur.fetchall()]
+	cur = g.db.execute('select id, price, type, contract, location, description, imagetodisplay from properties where type="Casa"' )
+	propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6]) for row in cur.fetchall()]
 	g.db.close()	
-	print propertyRecords
+	#print propertyRecords
 	
 	return render_template('casaslist.html' , propertyRecords = propertyRecords)
 
 @app.route('/terrenoslist')
 def terrenoslist():
-	return render_template('terrenoslist.html')
+	g.db = connect_db()
+	cur = g.db.execute('select id, price, type, contract, location, description, imagetodisplay from properties where type="Terreno"' )
+	propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6]) for row in cur.fetchall()]
+	g.db.close()	
+	#print propertyRecords
+	
+	return render_template('terrenoslist.html' , propertyRecords = propertyRecords)
+
+
+@app.route('/description/<int:post_id>')
+def show_post(post_id):
+    g.db = connect_db()
+    sql = 'select id, price, type, contract, location, state, description, imagetodisplay from properties where id=%d' %post_id
+    print sql
+    cur = g.db.execute(sql)
+    propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], state=row[5], description=row[6], imagetodisplay=row[7]) for row in cur.fetchall()]
+    g.db.close()
+    print propertyRecords
+    return render_template('single.html', propertyRecords = propertyRecords)
+
 
 @app.route('/acerca')
 def acerca():
@@ -77,12 +96,12 @@ def connect_db():
 
 def searchProperties( state, city, status, typeprop):
 	g.db = connect_db()
-	query = 'select price, type, contract, location, description, imagetodisplay from properties where state = "%s"' %state + ' and type = "%s"' %typeprop
+	query = 'select id, price, type, contract, location, description, imagetodisplay from properties where state = "%s"' %state + ' and type = "%s"' %typeprop
 	print query
 	cur = g.db.execute(query)
 	print 
 	#cur = g.db.execute('select price, type, contract, location, description, imagetodisplay from properties where state = %s ' %state  )
-	propertyRecords = [dict(price=row[0], type=row[1], contract=row[2] , location=row[3], description=row[4], imagetodisplay=row[5]) for row in cur.fetchall()]
+	propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6]) for row in cur.fetchall()]
 	g.db.close()		
 	return propertyRecords
 

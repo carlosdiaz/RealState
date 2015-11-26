@@ -261,106 +261,51 @@
             </div>
           </div>
         </div>
+        
+        {% block content %} 
         <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="property-container">
-              <div class="property-image">
-                <img src="../static/img/img02.jpg" alt="arillo real estate theme">
-                <div class="property-price">
-                  <h4>Residencia</h4>
-                  <span>$2,500,000</span>
-                </div>
-                <div class="property-status">
-                  <span>Venta</span>
-                </div>
-              </div>
-              <div class="property-features">
-                <span><i class="fa fa-home"></i> 2,000 m<sup>2</sup></span>
-                <span><i class="fa fa-hdd-o"></i> 3 Recamaras</span>
-                <span><i class="fa fa-male"></i> 2 Baños</span>
-              </div>
-              <div class="property-content">
-                <h3><a href="#">Marcia Bienes raices</a> <small>Cuernavaca Morelos</small></h3>
-              </div>
-            </div>
-          </div>
-          <!-- break -->
+                              
+          {% for propertyRecord in propertyRecords %}
+          
 
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="property-container">
               <div class="property-image">
-                <img src="../static/img/img03.jpg" alt="arillo real estate theme">
+                <img src="{{propertyRecord.imagetodisplay}}" alt="Marcia real state">
                 <div class="property-price">
-                  <h4>Villa</h4>
-                  <span>$15,000<small>/mes</small></span>
+                  <h4>{{propertyRecord.type}}</h4>
+                  <span>{{propertyRecord.price}}<small></small></span>
                 </div>
                 <div class="property-status">
-                  <span>Renta</span>
+                  <span>{{propertyRecord.contract}}</span>
                 </div>
               </div>
-              <div class="property-features">
-                <span><i class="fa fa-home"></i> 120 m<sup>2</sup></span>
-                <span><i class="fa fa-hdd-o"></i> 3 recamaras</span>
-                <span><i class="fa fa-male"></i> 2 baños</span>
-              </div>
-              <div class="property-content">
-                <h3><a href="#">Marcia Bienes raices</a> <small>Cuernavaca Morelos</small></h3>
-              </div>
-            </div>
-          </div>
-          <!-- break -->
 
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="property-container">
-              <div class="property-image">
-                <img src="../static/img/img04.jpg" alt="arillo real estate theme">
-                <div class="property-price">
-                  <h4>Casa</h4>
-                  <span>$1,650,000</span>
-                </div>
-                <div class="property-status">
-                  <span>Venta</span>
-                </div>
-              </div>
-              <div class="property-features">
-                <span><i class="fa fa-home"></i>150 m<sup>2</sup></span>
-                <span><i class="fa fa-hdd-o"></i> 2 Recamaras</span>
-                <span><i class="fa fa-male"></i> 3 Baños</span>
-              </div>
-              <div class="property-content">
-                <h3><a href="#">Marcia Bienes raices</a> <small>Temixco Morelos</small></h3>
-              </div>
-            </div>
-          </div>
-          <!-- break -->
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="property-container">
-              <div class="property-image">
-                <img src="../static/img/img05.jpg" alt="arillo real estate theme">
-                <div class="property-price">
-                  <h4>Casa</h4>
-                  <span>$6000<small>/mensual</small></span>
-                </div>
-                <div class="property-status">
-                  <span>Renta</span>
-                </div>
-              </div>
+              
               <div class="property-features">
                 <span><i class="fa fa-home"></i>130 m<sup>2</sup></span>
                 <span><i class="fa fa-hdd-o"></i> 3 Recamaras</span>
                 <span><i class="fa fa-male"></i> 2.5 Baños</span>
               </div>
+              
+
               <div class="property-content">
-                <h3><a href="#">Marcia Bienes raices</a> <small>Temixco Morelos</small></h3>
+                <h3><a href="description/{{propertyRecord.id}}">Mas Detalles</a> <small>{{propertyRecord.location}}</small></h3>
               </div>
             </div>
           </div>
-          <!-- break -->
-        </div>
-        <!-- end:latest -->
 
-        <!-- begin:for-sale -->
+          
+          {% endfor %}
+          
+          
+          
+          
+        </div>
+
+
+      
+
         <div class="row">
           <div class="col-md-12">
             <div class="heading-title">
@@ -368,79 +313,42 @@
             </div>
           </div>
         </div>
+
         <div class="row">
+        {% for propertyRecordsSold in propertyRecordsSold %}
+                
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="property-container">
               <div class="property-image">
-                <img src="../static/img/img06.jpg" alt="arillo real estate theme">
+                <img src="{{propertyRecordsSold.imagetodisplay}}" alt="Marcia real estate">
                 <div class="property-price">
-                  <h4>Residential</h4>
-                  <span>$800,000</span>
+                  <h4>{{propertyRecordsSold.type}}</h4>
+                  <span>{{propertyRecordsSold.price}}</span>
                 </div>
               </div>
               <div class="property-content">
-                <h3><a href="#">The Urban Life</a> <small>22, JJ Road, Yogyakarta</small></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h3><a href="description/{{propertyRecordsSold.id}}">{{propertyRecordsSold.type}}</a> <small>{{propertyRecordsSold.location}}</small></h3>
+                <p>{{propertyRecordsSold.description}}</p>
               </div>
+              <!--
               <div class="property-features">
                 <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
                 <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
                 <span><i class="fa fa-male"></i> 2 Bath</span>
                 <span><i class="fa fa-car"></i> 2 Garages</span>
               </div>
+              -->
             </div>
           </div>
-          <!-- break -->
+          
+          {% endfor %}
+          </div>
+          {% endblock %}
+          
 
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="property-container">
-              <div class="property-image">
-                <img src="../static/img/img07.jpg" alt="arillo real estate theme">
-                <div class="property-price">
-                  <h4>Residential</h4>
-                  <span>$800,000</span>
-                </div>
-              </div>
-              <div class="property-content">
-                <h3><a href="#">The Urban Life</a> <small>22, JJ Road, Yogyakarta</small></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-              </div>
-              <div class="property-features">
-                <span><i class="fa fa-home"></i> 6,000 m<sup>2</sup></span>
-                <span><i class="fa fa-hdd-o"></i> 3 Bed</span>
-                <span><i class="fa fa-male"></i> 2 Bath</span>
-                <span><i class="fa fa-building-o"></i> 2 Floors</span>
-              </div>
-            </div>
-          </div>
-          <!-- break -->
-
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="property-container">
-              <div class="property-image">
-                <img src="../static/img/img08.jpg" alt="arillo real estate theme">
-                <div class="property-price">
-                  <h4>Residential</h4>
-                  <span>$800,000</span>
-                </div>
-              </div>
-              <div class="property-content">
-                <h3><a href="#">The Urban Life</a> <small>22, JJ Road, Yogyakarta</small></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
-              </div>
-              <div class="property-features">
-                <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                <span><i class="fa fa-male"></i> 2 Bath</span>
-                <span><i class="fa fa-building-o"></i> 1 Floor</span>
-              </div>
-            </div>
-          </div>
-          <!-- break -->
-        </div>
+        
+          
+        
         <!-- end:for-sale -->
 
         <!-- begin:for-rent -->

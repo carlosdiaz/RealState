@@ -251,6 +251,8 @@
     <!-- end:service -->
 
     <!-- begin:content -->
+    {% block content %} 
+
     <div id="content">
       <div class="container">
         <!-- begin:latest -->
@@ -262,7 +264,6 @@
           </div>
         </div>
         
-        {% block content %} 
         <div class="row">
                               
           {% for propertyRecord in propertyRecords %}
@@ -280,31 +281,23 @@
                   <span>{{propertyRecord.contract}}</span>
                 </div>
               </div>
-
-              
+            
               <div class="property-features">
-                <span><i class="fa fa-home"></i>130 m<sup>2</sup></span>
-                <span><i class="fa fa-hdd-o"></i> 3 Recamaras</span>
-                <span><i class="fa fa-male"></i> 2.5 Baños</span>
+                <span><i class="fa fa-home"></i>{{propertyRecord.area}}<sup>2</sup></span>
+                <span><i class="fa fa-hdd-o"></i> {{propertyRecord.bedrooms}} Recamaras</span>
+                <span><i class="fa fa-male"></i> {{propertyRecord.bathrooms}} Baños</span>
               </div>
               
-
               <div class="property-content">
                 <h3><a href="description/{{propertyRecord.id}}">Mas Detalles</a> <small>{{propertyRecord.location}}</small></h3>
               </div>
             </div>
           </div>
-
-          
+        
           {% endfor %}
-          
-          
-          
-          
+                                    
         </div>
-
-
-      
+    
 
         <div class="row">
           <div class="col-md-12">
@@ -315,20 +308,20 @@
         </div>
 
         <div class="row">
-        {% for propertyRecordsSold in propertyRecordsSold %}
+        {% for propertyRecordsRented in propertyRecordsRented %}
                 
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="property-container">
               <div class="property-image">
-                <img src="{{propertyRecordsSold.imagetodisplay}}" alt="Marcia real estate">
+                <img src="{{propertyRecordsRented.imagetodisplay}}" alt="Marcia real estate">
                 <div class="property-price">
-                  <h4>{{propertyRecordsSold.type}}</h4>
-                  <span>{{propertyRecordsSold.price}}</span>
+                  <h4>{{propertyRecordsRented.type}}</h4>
+                  <span>{{propertyRecordsRented.price}}</span>
                 </div>
               </div>
               <div class="property-content">
-                <h3><a href="description/{{propertyRecordsSold.id}}">{{propertyRecordsSold.type}}</a> <small>{{propertyRecordsSold.location}}</small></h3>
-                <p>{{propertyRecordsSold.description}}</p>
+                <h3><a href="description/{{propertyRecordsRented.id}}">{{propertyRecordsRented.type}}</a> <small>{{propertyRecordsRented.location}}</small></h3>
+                <p>{{propertyRecordsRented.description}}</p>
               </div>
               <!--
               <div class="property-features">
@@ -343,15 +336,9 @@
           
           {% endfor %}
           </div>
-          {% endblock %}
           
-
-        
-          
-        
-        <!-- end:for-sale -->
-
-        <!-- begin:for-rent -->
+            
+                  
         <div class="row">
           <div class="col-md-12">
             <div class="heading-title">
@@ -360,33 +347,36 @@
           </div>
         </div>
         <div class="row">
+
+          {% for propertyRecordsSold in propertyRecordsSold %}
+        
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="property-container">
               <div class="property-content-list">
                 <div class="property-image-list">
-                  <img src="../static/img/img09.jpg" alt="arillo real estate theme">
+                  <img src="{{propertyRecordsSold.imagetodisplay}}" alt="Marcia real state">
                   <div class="property-price">
-                    <h4>Villa</h4>
-                    <span>$30,000<small>/month</small></span>
+                    <h4>{{propertyRecordsSold.type}}</h4>
+                    <span>{{propertyRecordsSold.price}}<small>/month</small></span>
                   </div>
                   <div class="property-features">
-                    <span><i class="fa fa-home"></i> 7,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 3 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                    <span><i class="fa fa-building-o"></i> 2 Floors</span>
-                    <span><i class="fa fa-car"></i> 2 Garages</span>
+                    <span><i class="fa fa-home"></i> {{propertyRecordsSold.area}}</span>
+                    <span><i class="fa fa-hdd-o"></i>{{propertyRecordsSold.bedroom}} Recamaras</span>
+                    <span><i class="fa fa-male"></i> {{propertyRecordsSold.bathroom}} Baños</span>                                        
                   </div>
                 </div>
                 <div class="property-text">
-                  <h3><a href="#">Luxury Villa In Rego Park</a> <small>22, JJ Road, Yogyakarta</small></h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <h3><a href="description/{{propertyRecordsSold.id}}">{{propertyRecordsSold.type}}</a> <small>{{propertyRecordsSold.location}}</small></h3>
+                  <p>{{propertyRecordsSold.description}}</p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- break -->
 
+        {% endfor %}
+        
+
+          <!--
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="property-container">
               <div class="property-content-list">
@@ -412,12 +402,16 @@
               </div>
             </div>
           </div>
-          <!-- break -->
+
+          -->
+          
         </div>
         <!-- end:for-rent -->
       </div>
     </div>
     <!-- end:content -->
+    {% endblock %}
+
 
     <!-- begin:testimony -->
     <div id="testimony" style="background-image: url(../static/img/img17.jpg);">

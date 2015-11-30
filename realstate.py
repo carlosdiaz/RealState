@@ -20,18 +20,35 @@ def home():
 			cityValue = request.form['city']
 			statusValue = request.form['status']
 			typeValue = request.form['type']
-			propertyRecords = searchProperties(stateValue, cityValue, statusValue, typeValue)
-
-			flash('Valor de state %s ' %stateValue )
-			flash('Valor de city %s '  %cityValue)
-			flash('Valor de city %s '  %statusValue)
-			flash('Valor de city %s '  %typeValue)
+			propertyRecords = searchProperties(stateValue, cityValue, statusValue, typeValue)		
 			return render_template('searchlist.html', propertyRecords = propertyRecords)
-		else:
-			
-			flash('Hubo un error' )
-			#return redirect(url_for('welcome'))
-	return render_template('index.html')
+
+	g.db = connect_db()
+	cur = g.db.execute('select id, price, type, contract, location, description, imagetodisplay, area, bathrooms , bedrooms from properties order by id desc limit 4' )	
+	propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6], area=row[7], bathrooms=row[8], bedrooms=row[9]) for row in cur.fetchall()]
+	g.db.close()
+
+	#print propertyRecords
+	print "##########################################################"
+
+	#Now we get the properties that are ready to be sold
+	g.db = connect_db()
+	cur = g.db.execute("select id, price, type, contract, location, description, imagetodisplay from properties where contract = 'Venta' order by id desc limit 3" )	
+	propertyRecordsRented = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6]) for row in cur.fetchall()]
+	g.db.close()
+
+	print propertyRecordsRented
+
+
+	#Now we get the properties that are ready to be rented
+	g.db = connect_db()
+	cur = g.db.execute("select id, price, type, contract, location, description, imagetodisplay, area, bathrooms, bedrooms from properties where contract = 'Renta' order by id desc limit 2" )	
+	propertyRecordsSold = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6], area=row[7], bathrooms=row[8], bedrooms=row[9]) for row in cur.fetchall()]
+	g.db.close()
+
+	print propertyRecordsSold
+
+	return render_template('index.html', propertyRecords = propertyRecords, propertyRecordsSold = propertyRecordsSold, propertyRecordsRented = propertyRecordsRented)
 
 
 @app.route('/contact')
@@ -108,3 +125,4 @@ def searchProperties( state, city, status, typeprop):
 if __name__ == '__main__':
     #app.run()
     app.run(debug=True)
+    #app.run(host='0.0.0.0', port=2525)

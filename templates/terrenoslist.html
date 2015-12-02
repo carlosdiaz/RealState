@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block bread %}terrenoslist{% endblock %}
+{% block propertyType %}Terrenos recientes{% endblock %}
 
 
 {% block content %}
@@ -42,7 +43,7 @@
                     <div class="property-text">
                       <h3><a href="description/{{propertyRecord.id}}">{{propertyRecord.location}}</a> <small>{{propertyRecord.location}}</small></h3>
                       <p>{{propertyRecord.description}}</p>
-                      <p><a href="#" class="btn btn-primary">Mas detalles &raquo;</a></p>
+                      <p><a href="description/{{propertyRecord.id}}" class="btn btn-primary">Mas detalles &raquo;</a></p>
                     </div>
                   </div>  
                 </div>

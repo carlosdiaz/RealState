@@ -78,20 +78,23 @@
     <!-- end:navbar -->
 
     <!-- begin:header -->
-    <div id="header" class="heading" style="background-image: url(img/img01.jpg);">
+    <!-- begin:header -->
+    <div id="header" class="heading" style="background-image: url(../static/img/img01.jpg);">
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-1 col-sm-12">
             <div class="quick-search">
               <div class="row">
                 <form role="form">
-                  <div class="col-md-3 col-sm-3 col-xs-6">
+
+                  <div class="col-md-3 col-sm-3 col-xs-4">
                     <div class="form-group">
-                      <label for="bedroom">Keyword</label>
+                      <label for="bedroom">Termino de busqueda</label>
                       <input type="text" class="form-control" placeholder="Enter keyword">
                     </div>
+                    <!--
                     <div class="form-group">
-                      <label for="bedroom">Bedroom</label>
+                      <label for="bedroom">Recamaras</label>
                       <select class="form-control">
                         <option>1</option>
                         <option>2</option>
@@ -99,18 +102,20 @@
                         <option>4</option>
                       </select>
                     </div>
+                    -->
                   </div>
                   <!-- break -->
-                  <div class="col-md-3 col-sm-3 col-xs-6">
+                  <div class="col-md-3 col-sm-3 col-xs-4">
                     <div class="form-group">
-                      <label for="status">Status</label>
+                      <label for="status">Estatus</label>
                       <select class="form-control">
-                        <option>On Sale</option>
-                        <option>For Rent</option>
+                        <option>Venta</option>
+                        <option>Renta</option>
                       </select>
                     </div>
+                    <!--
                     <div class="form-group">
-                      <label for="bathroom">Bathroom</label>
+                      <label for="bathroom">Baños</label>
                       <select class="form-control">
                         <option>1</option>
                         <option>2</option>
@@ -118,19 +123,21 @@
                         <option>4</option>
                       </select>
                     </div>
+                    -->
                   </div>
                   <!-- break -->
-                  <div class="col-md-3 col-sm-3 col-xs-6">
+                  <div class="col-md-3 col-sm-3 col-xs-4">
                     <div class="form-group">
-                      <label for="type">Type</label>
+                      <label for="type">Tipo</label>
                       <select class="form-control">
-                        <option>Villa</option>
-                        <option>Recident</option>
-                        <option>Commercial</option>
+                        <option>Casa</option>
+                        <option>Departamento</option>
+                        <option>Terreno</option>
                       </select>
                     </div>
+                    <!--
                     <div class="form-group">
-                      <label for="minprice">Min Price</label>
+                      <label for="minprice">Precio minimo</label>
                       <select class="form-control">
                         <option>$4,200</option>
                         <option>$6,700</option>
@@ -138,11 +145,15 @@
                         <option>$11,110</option>
                       </select>
                     </div>
+                    -->
                   </div>
                   <!-- break -->
-                  <div class="col-md-3 col-sm-3 col-xs-6">
+                  
+
+                  <div class="col-md-3 col-sm-3 col-xs-4">
+                    <!--
                     <div class="form-group">
-                      <label for="maxprice">Max Price</label>
+                      <label for="maxprice">Precio maximo</label>
                       <select class="form-control">
                         <option>$8,200</option>
                         <option>$11,700</option>
@@ -150,9 +161,11 @@
                         <option>$21,110</option>
                       </select>
                     </div>
+                    -->
+
                     <div class="form-group">
                       <label for="maxprice">&nbsp;</label>
-                      <input type="submit" name="submit" value="Search Again" class="btn btn-primary btn-block">
+                      <input type="submit" name="submit" value="Buscar" class="btn btn-primary btn-block">
                     </div>
                   </div>
 
@@ -160,13 +173,15 @@
               </div>
             </div>
             <ol class="breadcrumb">
-              <li><a href="#">Inicio</a></li>
-              <li class="active">Descripcion</li>
+              <li><a href="/">Inicio</a></li>              
+              <li><a href="#">Detalles</a></li>              
+         
             </ol>
           </div>
         </div>
       </div>
     </div>
+    <!-- end:header -->
     <!-- end:header -->
 
     <!-- begin:content -->

@@ -53,8 +53,10 @@
                 <li><a href="/depaslist">Departamentos</a></li>
                 <li><a href="/casaslist">Casas</a></li>
                 <li><a href="/terrenoslist">Terrenos</a></li>
+                <!--
                 <li><a href="#">Otros</a></li>
                 <li><a href="/departamentos">Depas</a></li>
+                -->
               </ul>
             </li>
             <li class="dropdown">
@@ -268,16 +270,22 @@
 
           <!-- begin:sidebar -->
           <div class="col-md-3 col-md-pull-9 sidebar">
+          
             <div class="widget widget-sidebar widget-white">
               <div class="widget-header">
-                <h3>Departamentos recientes</h3>
+                <h3>                
+                {% block propertyType %} {% endblock %}
+                </h3>
               </div>
-            {% block body %}
+          
 
+            
+
+          {% block body %}
             {% for propertyRecord in propertyRecords %}
     
               <ul>
-                <li><a href="#">{{propertyRecord.type}}</a></li>
+                <li><a href="#">{{propertyRecord.type}}-{{propertyRecord.location}}</a></li>
                 <!--
                 <li><a href="#">Land In Central Park</a></li>
                 <li><a href="#">The Urban Life</a></li>
@@ -296,10 +304,12 @@
                 <h3>Tipos de propiedades</h3>
               </div>    
               <ul class="list-check">
-                <li><a href="#">Casas</a>&nbsp;(18)</li>
-                <li><a href="#">Departamentos</a>&nbsp;(43)</li>
-                <li><a href="#">Bodegas</a>&nbsp;(31)</li>
-                <li><a href="#">Terrenos</a>&nbsp;(52)</li>                
+                <li><a href="/casaslist">Casas</a>&nbsp;</li>
+                <li><a href="/depaslist">Departamentos</a>&nbsp;</li>
+                <!--
+                <li><a href="/bodegaslist">Bodegas</a>&nbsp;(31)</li>
+                -->
+                <li><a href="/terrenoslist">Terrenos</a>&nbsp;</li>                
               </ul>
             </div>
             <!-- break -->

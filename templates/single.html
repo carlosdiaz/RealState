@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="description" content="arillo is responsive html real estate theme">
-    <meta name="author" content="afriq yasin ramadhan">
+    <meta name="description" content="Marcia real state">
+    <meta name="author" content="carlos">
     <link rel="shortcut icon" href="img/favicon.png">
 
    <title>Marcia bienes raices</title>
@@ -52,8 +52,10 @@
                 <li><a href="/depaslist">Departamentos</a></li>
                 <li><a href="/casaslist">Casas</a></li>
                 <li><a href="/terrenoslist">Terrenos</a></li>
+                <!--
                 <li><a href="category_list.html">Otros</a></li>
                 <li><a href="/departamentos">Depas</a></li>
+                -->
               </ul>
             </li>
             <li class="dropdown">
@@ -210,7 +212,7 @@
                         <div id="slider-property" class="carousel slide" data-ride="carousel">
                           <ol class="carousel-indicators">
                             <li data-target="#slider-property" data-slide-to="0" class="active">
-                              <img src="{{propertyRecord.imagetodisplay}}" alt="">
+                              <img src="../static/{{propertyRecord.imagetodisplay}}" alt="">
                             </li>
                             <li data-target="#slider-property" data-slide-to="1" class= "">
                               <img src="../static/img/img03.jpg" alt="">
@@ -221,7 +223,7 @@
                           </ol>
                           <div class="carousel-inner">
                             <div class="item">
-                              <img src="{{propertyRecord.imagetodisplay}}" alt="">
+                              <img src="../static/{{propertyRecord.imagetodisplay}}" alt="">
                             </div>
                             <div class="item active">
                               <img src="../static/img/img03.jpg" alt="">
@@ -396,46 +398,36 @@
 
           <!-- begin:sidebar -->
           <div class="col-md-3 col-md-pull-9 sidebar">
-            <div class="widget-white favorite">
-              <a href="#"><i class="fa fa-heart"></i> Add to favorite</a>
-            </div>
+            
+            <!-- break -->
+            
             <!-- break -->
             <div class="widget widget-sidebar widget-white">
               <div class="widget-header">
-                <h3>Recent Property</h3>
-              </div>    
-              <ul>
-                <li><a href="#">Luxury Villa</a></li>
-                <li><a href="#">Land In Central Park</a></li>
-                <li><a href="#">The Urban Life</a></li>
-                <li><a href="#">Luxury Office</a></li>
-                <li><a href="">Luxury Villa In Rego Park</a></li>
-              </ul>
-            </div>
-            <!-- break -->
-            <div class="widget widget-sidebar widget-white">
-              <div class="widget-header">
-                <h3>Property Type</h3>
+                <h3>Tipos de propiedades</h3>
               </div>    
               <ul class="list-check">
-                <li><a href="#">Office</a>&nbsp;(18)</li>
-                <li><a href="#">Office</a>&nbsp;(43)</li>
-                <li><a href="#">Shop</a>&nbsp;(31)</li>
-                <li><a href="#">Villa</a>&nbsp;(52)</li>
-                <li><a href="#">Apartment</a>&nbsp;(8)</li>
-                <li><a href="#">Single Family Home</a>&nbsp;(11)</li>
+                <li><a href="/casaslist">Casas</a>&nbsp;</li>
+                <li><a href="/depaslist">Departamentos</a>&nbsp;</li>
+                <!--
+                <li><a href="/bodegaslist">Bodegas</a>&nbsp;(31)</li>
+                -->
+                <li><a href="/terrenoslist">Terrenos</a>&nbsp;</li>                
+
               </ul>
+
+
+
             </div>
             <!-- break -->
             <div class="widget widget-sidebar widget-white">
               <div class="widget-header">
-                <h3>Top Agents</h3>
+                <h3>Agentes</h3>
               </div>    
               <ul>
-                <li><a href="#">John Doe</a></li>
-                <li><a href="#">Christoper Drew</a></li>
-                <li><a href="#">Jane Doe</a></li>
-                <li><a href="#">Jeny</a></li>
+                <li><a href="#">Marcia</a></li>
+                <li><a href="#">Diana</a></li>
+                <li><a href="#">Paulina</a></li>                
               </ul>
             </div>
             <!-- break -->
@@ -464,14 +456,7 @@
           <div class="col-md-12">
             <div class="jcarousel-wrapper">
               <div class="jcarousel">
-                <ul>
-                  <li><a href="#"><img src="img/img01.jpg" alt="partner of arillo responsive real estate theme"></a></li>
-                  <li><a href="#"><img src="img/img02.jpg" alt="partner of arillo responsive real estate theme"></a></li>
-                  <li><a href="#"><img src="img/img03.jpg" alt="partner of arillo responsive real estate theme"></a></li>
-                  <li><a href="#"><img src="img/img04.jpg" alt="partner of arillo responsive real estate theme"></a></li>
-                  <li><a href="#"><img src="img/img05.jpg" alt="partner of arillo responsive real estate theme"></a></li>
-                  <li><a href="#"><img src="img/img06.jpg" alt="partner of arillo responsive real estate theme"></a></li>
-                </ul>
+                
               </div>
               <a href="#" class="jcarousel-control-prev"><i class="fa fa-angle-left"></i></a>
               <a href="#" class="jcarousel-control-next"><i class="fa fa-angle-right"></i></a>

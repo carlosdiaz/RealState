@@ -1,12 +1,19 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash, g
-from functools import wraps
 import sqlite3
 import smtplib
+from flask import Flask, render_template, redirect, url_for, request, session, flash, g
+from functools import wraps
+from mapping_model import Property, Image
+from sqlalchemy.orm import scoped_session, sessionmaker, Query
+from sqlalchemy.orm import relationship, backref
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import join
+
 
 
 app = Flask(__name__)
 
-#app.database = "marciarealstate.db"
+
 #Next was the original database
 #app.database = "realstate.db"
 #Next is the database created with flask admin
@@ -14,12 +21,14 @@ app.database = "/tmp/propertyRS.db"
 
 app.secret_key = "xcFtjs3Ji896Ghm"
 
-
+#Next lines are for SQL Alchemy use
+engine = create_engine("sqlite:////tmp/propertyRS.db")
+Base = declarative_base()
+Base.metadata.reflect(engine)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-	if request.method == 'POST':
-		#flash('Es un post' )
+	if request.method == 'POST':		
 		if request.form['state'] != "" :	
 			stateValue = request.form['state']
 			cityValue = request.form['city']
@@ -27,44 +36,44 @@ def home():
 			typeValue = request.form['type']
 			propertyRecords = searchProperties(stateValue, cityValue, statusValue, typeValue)		
 			return render_template('searchlist.html', propertyRecords = propertyRecords)
+    
 
-	g.db = connect_db()
-	#cur = g.db.execute('select id, price, typeprop, contract, location, description, imagetodisplay, area, bathrooms , bedrooms from property order by id desc limit 4' )	
-	cur = g.db.execute('select property.id, price, typeprop, contract, location, description, image.path, area, bathrooms , bedrooms from property inner join image on property.id = image.property_id order by property.id desc limit 4' )	
-	#select * from property inner join image on property.id = image.id order by property.id desc limit 4
-	propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6], area=row[7], bathrooms=row[8], bedrooms=row[9]) for row in cur.fetchall()]
-	g.db.close()
+	db_session = scoped_session(sessionmaker(bind=engine))
+	propertyRecords = []
+	propertyRecordsRented = []
+	propertyRecordsSold = []
+	
 
-	#print propertyRecords
-	print "##########################################################"
+	for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).order_by(Property.id.desc()).limit(4):
+		propertyDict = dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])    		
+		propertyRecords.append(propertyDict)
+		print propertyDict    	
+    		
+	
 
-	#Now we get the properties that are ready to be sold
-	g.db = connect_db()
-	#cur = g.db.execute("select id, price, type, contract, location, description, imagetodisplay from property where contract = 'Venta' order by id desc limit 3" )	
-	cur = g.db.execute("select property.id, price, typeprop, contract, location, description, image.path from property inner join image on property.id = image.property_id where contract = 'Venta' order by property.id desc limit 3" )	
-	propertyRecordsRented = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6]) for row in cur.fetchall()]
-	g.db.close()
-
-	print propertyRecordsRented
+    for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).filter(Property.contract == 'Venta').order_by(Property.id.desc()).limit(3):
+		#propertyRecords = [dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])]
+		propertyDict = dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])    		
+		propertyRecordsRented.append(propertyDict)
+		#print propertyDict
 
 
 	#Now we get the properties that are ready to be rented
-	g.db = connect_db()
-	#cur = g.db.execute("select id, price, type, contract, location, description, imagetodisplay, area, bathrooms, bedrooms from properties where contract = 'Renta' order by id desc limit 2" )	
-	cur = g.db.execute("select property.id, price, typeprop, contract, location, description, image.path, area, bathrooms, bedrooms from property inner join image on property.id = image.property_id where contract = 'Renta' order by property.id desc limit 2" )	
-	propertyRecordsSold = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], description=row[5], imagetodisplay=row[6], area=row[7], bathrooms=row[8], bedrooms=row[9]) for row in cur.fetchall()]
-	g.db.close()
+
+	for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).filter(Property.contract == 'Renta').order_by(Property.id.desc()).limit(2):
+		#propertyRecords = [dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])]
+		propertyDict = dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])    		
+		propertyRecordsSold.append(propertyDict)
+		print propertyDict
 
 	print propertyRecordsSold
-
 	return render_template('index.html', propertyRecords = propertyRecords, propertyRecordsSold = propertyRecordsSold, propertyRecordsRented = propertyRecordsRented)
 
 
 @app.route('/contact', methods= ['GET', 'POST'])
 def contact():	
 	if request.method == 'POST':
-		flash('enviar mail' )
-		print('Estamos dentro del post')
+		flash('enviar mail' )		
 		if request.form['name'] != "" :	
 			name = request.form['name']
 			email = request.form['email']
@@ -83,16 +92,14 @@ def contact():
 			   print "Successfully sent email"
 			except Exception:
 			   print "Error: unable to send email"
-			#propertyRecords = searchProperties(stateValue, cityValue, statusValue, typeValue)		
-			#return render_template('searchlist.html')
-	elif request.method == 'GET':
-		print('Estamos dentro del get')
 
 	return render_template('contact.html')
+
 
 @app.route('/departamentos')
 def departamentos():
 	return render_template('depas.html')
+
 
 @app.route('/depaslist')
 def depaslist():
@@ -130,8 +137,7 @@ def terrenoslist():
 @app.route('/description/<int:post_id>')
 def show_post(post_id):
     g.db = connect_db()
-    sql = 'select property.id, price, typeprop, contract, location, state, description, image.path from property inner join image on property.id = image.property_id where property.id=%d' %post_id
-    #'select property.id, price, typeprop, contract, location, description, image.path, area, bathrooms , bedrooms from property inner join image on property.id = image.property_id order by property.id desc limit 4' )	
+    sql = 'select property.id, price, typeprop, contract, location, state, description, image.path from property inner join image on property.id = image.property_id where property.id=%d' %post_id    
     print sql
     cur = g.db.execute(sql)
     propertyRecords = [dict(id=row[0], price=row[1], type=row[2], contract=row[3] , location=row[4], state=row[5], description=row[6], imagetodisplay=row[7]) for row in cur.fetchall()]

@@ -17,7 +17,7 @@ app = Flask(__name__)
 #Next was the original database
 #app.database = "realstate.db"
 #Next is the database created with flask admin
-app.database = "/tmp/propertyRS.db"
+app.database = "propertyRS.db"
 
 app.secret_key = "xcFtjs3Ji896Ghm"
 
@@ -25,6 +25,8 @@ app.secret_key = "xcFtjs3Ji896Ghm"
 engine = create_engine("sqlite:////tmp/propertyRS.db")
 Base = declarative_base()
 Base.metadata.reflect(engine)
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -49,23 +51,18 @@ def home():
 		propertyRecords.append(propertyDict)
 		print propertyDict    	
     		
-	
-
-    for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).filter(Property.contract == 'Venta').order_by(Property.id.desc()).limit(3):
-		#propertyRecords = [dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])]
+	for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).filter(Property.contract == 'Venta').order_by(Property.id.desc()).limit(3):		
 		propertyDict = dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])    		
 		propertyRecordsRented.append(propertyDict)
 		#print propertyDict
 
 
 	#Now we get the properties that are ready to be rented
-
-	for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).filter(Property.contract == 'Renta').order_by(Property.id.desc()).limit(2):
-		#propertyRecords = [dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])]
+	for prop in db_session.query(Property.id, Property.price, Property.typeprop,Property.contract, Property.location, Property.description, Image.path, Property.area, Property.bathrooms, Property.bedrooms).join(Image).filter(Property.contract == 'Renta').order_by(Property.id.desc()).limit(2):		
 		propertyDict = dict(id=prop[0], price=prop[1], type=prop[2], contract=prop[3] , location=prop[4], description=prop[5], imagetodisplay=prop[6], area=prop[7], bathrooms=prop[8], bedrooms=prop[9])    		
 		propertyRecordsSold.append(propertyDict)
 		print propertyDict
-
+		
 	print propertyRecordsSold
 	return render_template('index.html', propertyRecords = propertyRecords, propertyRecordsSold = propertyRecordsSold, propertyRecordsRented = propertyRecordsRented)
 
@@ -164,7 +161,13 @@ def searchProperties( state, city, status, typeprop):
 	g.db.close()		
 	return propertyRecords
 
+@app.errorhandler(404)
+def page_not_found(error):	
+	return render_template('404.html'), 404
+
 if __name__ == '__main__':
     #app.run()
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.debug = False
+    app.run()
     #app.run(host='0.0.0.0', port=2525, use_reloader=True)
